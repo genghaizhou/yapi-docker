@@ -1,0 +1,24 @@
+version: "3.3"
+services:
+  yapi-mongo:
+    container_name: yapi-mongo
+    image: mongo
+    ports: 
+      - 27017:27017
+    volumes: 
+      - ./data/mongo:/data/db
+
+  yapi-web:
+    container_name: yapi-web
+    image: yapi
+    depends_on: 
+      - yapi-mongo
+    links: 
+      - yapi-mongo
+    ports: 
+      - 3000:3000
+
+# networks:
+#   default:
+#     driver: bridge
+
